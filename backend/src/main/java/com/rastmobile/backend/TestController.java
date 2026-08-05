@@ -19,7 +19,7 @@ public class TestController {
     // Yeni bir board oluşturma isteği 
     @PostMapping("/test")
     public Board createTest(@RequestBody BoardRequest request) {
-    return boardService.createBoard(request.getName(), request.getDescription());
+    return boardService.createBoard(request.getName());
     }
 
     // URL'den gelen id değerini yakalayıp geri döndüren basit test endpoint'i

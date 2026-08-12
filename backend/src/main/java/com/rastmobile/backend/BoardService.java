@@ -49,9 +49,10 @@ public class BoardService {
                 .findFirst()
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Liste bulunamadı: " + listName));
 
-        // 3. Bulunan listeye yeni kartı ekle
+        // 3. Bulunan listeye yeni kartı ekle; order alanı, listedeki mevcut kart sayısına eşitlenerek en sona yerleştirilir
         Card card = new Card();
         card.setTitle(cardTitle);
+        card.setOrder(targetList.getCards().size());
         targetList.getCards().add(card);
 
         // 4. Güncellenmiş board'u kaydet ve geri döndür

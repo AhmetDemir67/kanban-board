@@ -3,6 +3,7 @@ package com.rastmobile.backend;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,5 +43,12 @@ public class BoardController {
     public Board deleteCardFromList(@PathVariable String boardId, @PathVariable String listName,
             @PathVariable String cardId) {
         return boardService.deleteCardFromList(boardId, listName, cardId);
+    }
+
+    // Bir kartı başka bir listeye taşır veya aynı liste içinde sırasını değiştirir
+    @PatchMapping("/{boardId}/cards/{cardId}")
+    public Board moveCard(@PathVariable String boardId, @PathVariable String cardId,
+            @RequestBody MoveCardRequest request) {
+        return boardService.moveCard(boardId, cardId, request.getTargetListName(), request.getNewOrder());
     }
 }

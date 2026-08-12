@@ -76,4 +76,46 @@ public class BoardService {
         // 4. Güncellenmiş board'u kaydet ve geri döndür
         return boardRepository.save(board);
     }
+
+    // Bir kartı başka bir listeye taşır (veya aynı liste içinde sırasını değiştirir) ve board'u günceller
+    public Board moveCard(String boardId, String cardId, String targetListName, int newOrder) {
+        // 1. Board bulunamazsa 404 döndürecek şekilde exception fırlat
+        Board board = boardRepository.findById(boardId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Board bulunamadı: " + boardId));
+
+        // 2. Tüm listeleri gezip cardId'ye sahip kartı ve bulunduğu listeyi bul
+        Card movingCard = null;
+        TaskList sourceList = null;
+        for (TaskList list : board.getLists()) {
+            for (Card card : list.getCards()) {
+                if (card.getId().equals(cardId)) {
+                    movingCard = card;
+                    sourceList = list;
+                    break;
+                }
+            }
+            if (movingCard != null) {
+                break;
+            }
+        }
+        if (movingCard == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Kart bulunamadı: " + cardId);
+        }
+
+        // 3. Kartı eski listeden çıkar
+        sourceList.getCards().remove(movingCard);
+
+        // 4. Kartın sırasını güncelle
+        movingCard.setOrder(newOrder);
+
+        // 5. Hedef listeyi bul (bulunamazsa 404 fırlat) ve kartı bu listeye ekle
+        TaskList targetList = board.getLists().stream()
+                .filter(list -> list.getName().equals(targetListName))
+                .findFirst()
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Liste bulunamadı: " + targetListName));
+        targetList.getCards().add(movingCard);
+
+        // 6. Güncellenmiş board'u kaydet ve geri döndür
+        return boardRepository.save(board);
+    }
 }

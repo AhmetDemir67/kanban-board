@@ -1,6 +1,7 @@
 package com.rastmobile.backend;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,8 +31,16 @@ public class BoardController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    // Belirtilen board'daki belirtilen listeye yeni bir kart ekler
     @PostMapping("/{boardId}/lists/{listName}/cards")
     public Board addCardToList(@PathVariable String boardId, @PathVariable String listName, @RequestBody CardRequest request) {
         return boardService.addCardToList(boardId, listName, request.getTitle());
+    }
+
+    // Belirtilen board'daki belirtilen listeden, id'si eşleşen kartı siler
+    @DeleteMapping("/{boardId}/lists/{listName}/cards/{cardId}")
+    public Board deleteCardFromList(@PathVariable String boardId, @PathVariable String listName,
+            @PathVariable String cardId) {
+        return boardService.deleteCardFromList(boardId, listName, cardId);
     }
 }

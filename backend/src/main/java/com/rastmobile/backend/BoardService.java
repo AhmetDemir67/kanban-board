@@ -57,4 +57,23 @@ public class BoardService {
         // 4. Güncellenmiş board'u kaydet ve geri döndür
         return boardRepository.save(board);
     }
+
+    // Belirtilen board'daki, ismi listName olan listeden id'si cardId olan kartı siler ve board'u günceller
+    public Board deleteCardFromList(String boardId, String listName, String cardId) {
+        // 1. Board bulunamazsa 404 döndürecek şekilde exception fırlat
+        Board board = boardRepository.findById(boardId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Board bulunamadı: " + boardId));
+
+        // 2. Board'un listeleri arasında ismi eşleşen TaskList'i bul
+        TaskList targetList = board.getLists().stream()
+                .filter(list -> list.getName().equals(listName))
+                .findFirst()
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Liste bulunamadı: " + listName));
+
+        // 3. Listenin kartları arasından id'si eşleşen kartı çıkar
+        targetList.getCards().removeIf(card -> card.getId().equals(cardId));
+
+        // 4. Güncellenmiş board'u kaydet ve geri döndür
+        return boardRepository.save(board);
+    }
 }

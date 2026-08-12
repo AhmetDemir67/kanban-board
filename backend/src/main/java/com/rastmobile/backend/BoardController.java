@@ -29,4 +29,9 @@ public class BoardController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @PostMapping("/{boardId}/lists/{listName}/cards")
+    public Board addCardToList(@PathVariable String boardId, @PathVariable String listName, @RequestBody CardRequest request) {
+        return boardService.addCardToList(boardId, listName, request.getTitle());
+    }
 }

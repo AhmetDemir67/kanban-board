@@ -92,6 +92,45 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "Kart taşı/sırala",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n     \"targetListName\": \"To Do\",\r\n     \"newOrder\": 5\r\n   }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/boards/6a7bbe62ef652d603a25040d/cards/2f13a350-4f87-4697-a30a-9d9208507dca",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "boards",
+            "6a7bbe62ef652d603a25040d",
+            "cards",
+            "2f13a350-4f87-4697-a30a-9d9208507dca"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Tüm Board'ları Listele",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
     }
   ]
 }

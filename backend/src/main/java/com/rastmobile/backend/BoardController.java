@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 @RestController
 @RequestMapping("/boards")
@@ -23,6 +24,11 @@ public class BoardController {
     @PostMapping
     public Board createBoard(@Valid @RequestBody BoardRequest request) {
         return boardService.createBoard(request.getName());
+    }
+
+    @GetMapping
+    public List<Board> getAllBoards() {
+    return boardService.getAllBoards();
     }
 
     @GetMapping("/{id}")

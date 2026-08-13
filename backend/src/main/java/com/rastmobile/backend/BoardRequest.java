@@ -1,8 +1,12 @@
 package com.rastmobile.backend;
 
+import jakarta.validation.constraints.NotBlank;
+
+// Yeni board oluşturma isteğinde sadece isim bilgisini taşıyan istek modeli
 public class BoardRequest {
+
+    @NotBlank
     private String name;
-    private String description;
 
     public String getName() {
         return name;
@@ -10,13 +14,5 @@ public class BoardRequest {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }

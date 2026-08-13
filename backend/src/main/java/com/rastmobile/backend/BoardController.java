@@ -1,6 +1,6 @@
 package com.rastmobile.backend;
 
-import org.springframework.http.ResponseEntity;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -21,20 +21,18 @@ public class BoardController {
     }
 
     @PostMapping
-    public Board createBoard(@RequestBody BoardRequest request) {
+    public Board createBoard(@Valid @RequestBody BoardRequest request) {
         return boardService.createBoard(request.getName());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Board> getBoardById(@PathVariable String id) {
-        return boardService.getBoardById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public Board getBoardById(@PathVariable String id) {
+        return boardService.getBoardById(id);
     }
 
     // Belirtilen board'daki belirtilen listeye yeni bir kart ekler
     @PostMapping("/{boardId}/lists/{listName}/cards")
-    public Board addCardToList(@PathVariable String boardId, @PathVariable String listName, @RequestBody CardRequest request) {
+    public Board addCardToList(@PathVariable String boardId, @PathVariable String listName, @Valid @RequestBody CardRequest request) {
         return boardService.addCardToList(boardId, listName, request.getTitle());
     }
 

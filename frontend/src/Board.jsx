@@ -1,21 +1,21 @@
 import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import List from './List.jsx'
+import { getBoardById } from './boardService.js'
 
 function Board() {
+  const { id } = useParams()
   const [board, setBoard] = useState(null)
 
-  // Component açıldığında backend'den tüm board'ları çekip ilk board'u state'e kaydeder
+  // URL'deki id değiştiğinde backend'den o board'u çeker
   useEffect(() => {
-    fetch('http://localhost:8080/boards')
-      .then((res) => res.json())
-      .then((boards) => {
-        if (boards.length > 0) {
-          setBoard(boards[0])
-        }
-      })
-  }, [])
+    async function loadBoard() {
+      const data = await getBoardById(id)
+      setBoard(data)
+    }
+    loadBoard()
+  }, [id])
 
-  // Board verisi henüz gelmediyse yükleniyor mesajı göster
   if (!board) {
     return <p>Yükleniyor...</p>
   }

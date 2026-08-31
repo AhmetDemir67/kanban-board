@@ -7,12 +7,14 @@ function Board() {
   const { id } = useParams()
   const [board, setBoard] = useState(null)
 
-  // URL'deki id değiştiğinde backend'den o board'u çeker
+  // Backend'den board verisini çeker; kart eklendikten sonra güncel veriyi almak için de tekrar çağrılır
+  async function loadBoard() {
+    const data = await getBoardById(id)
+    setBoard(data)
+  }
+
+  // URL'deki id değiştiğinde board'u çeker
   useEffect(() => {
-    async function loadBoard() {
-      const data = await getBoardById(id)
-      setBoard(data)
-    }
     loadBoard()
   }, [id])
 
@@ -24,7 +26,13 @@ function Board() {
     <div className="board">
       <h2>{board.name}</h2>
       {board.lists.map((list) => (
-        <List key={list.name} name={list.name} cards={list.cards} />
+        <List
+          key={list.name}
+          name={list.name}
+          cards={list.cards}
+          boardId={board.id}
+          onCardAdded={loadBoard}
+        />
       ))}
     </div>
   )

@@ -30,6 +30,37 @@ body {
   margin-bottom: 10px;
 }
 
+/* Kart ekleme formu: input ve butonu dikey sırayla, aralarında boşlukla düzenler */
+.add-card-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Kart ekleme input'u: koyu tema ile uyumlu arka plan, açık yazı, ince kenarlık */
+.add-card-form input {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+  border: 1px solid #3a3a3a;
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+
+/* Kart ekleme butonu: kartlarla uyumlu mor vurgu rengi, hover'da hafif renk değişimi */
+.add-card-form button {
+  background-color: #6d5bd0;
+  color: #f0f0f0;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.add-card-form button:hover {
+  background-color: #8272e0;
+}
+
 /* Tablet ve üstü (768px+): listeler yan yana dizilir, sabit genişlikte */
 @media (min-width: 768px) {
   .board {

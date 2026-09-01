@@ -22,3 +22,13 @@ export async function addCardToList(boardId, listName, title) {
   )
   return res.json()
 }
+
+// Bir kartı belirtilen listeye taşır (yeni sırası şimdilik sabit olarak backend'e gönderilir)
+export async function moveCard(boardId, cardId, targetListName, newOrder) {
+  const res = await fetch(`http://localhost:8080/boards/${boardId}/cards/${cardId}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ targetListName, newOrder }),
+  })
+  return res.json()
+}

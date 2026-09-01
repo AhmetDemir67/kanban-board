@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { DndContext } from '@dnd-kit/core'
 import List from './List.jsx'
-import { getBoardById } from './boardService.js'
+import { getBoardById, moveCard } from './boardService.js'
 
 function Board() {
   const { id } = useParams()
@@ -22,18 +23,31 @@ function Board() {
     return <p>Yükleniyor...</p>
   }
 
+  // Kart bir listenin üzerine bırakıldığında backend'e taşıma isteği gönderir ve board'u yeniden yükler
+  async function onDragEnd(event) {
+    // Kart geçerli bir alana bırakılmadıysa (liste dışına bırakıldıysa) hiçbir şey yapma
+    if (!event.over) return
+
+    const cardId = event.active.id
+    const targetListName = event.over.id
+    await moveCard(board.id, cardId, targetListName, 0)
+    loadBoard()
+  }
+
   return (
     <div className="board">
       <h2>{board.name}</h2>
-      {board.lists.map((list) => (
-        <List
-          key={list.name}
-          name={list.name}
-          cards={list.cards}
-          boardId={board.id}
-          onCardAdded={loadBoard}
-        />
-      ))}
+      <DndContext onDragEnd={onDragEnd}>
+        {board.lists.map((list) => (
+          <List
+            key={list.name}
+            name={list.name}
+            cards={list.cards}
+            boardId={board.id}
+            onCardAdded={loadBoard}
+          />
+        ))}
+      </DndContext>
     </div>
   )
 }

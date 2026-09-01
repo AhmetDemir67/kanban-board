@@ -1,9 +1,13 @@
 import { useState } from 'react'
+import { useDroppable } from '@dnd-kit/core'
 import Card from './Card.jsx'
 import { addCardToList } from './boardService.js'
 
 function List({ name, cards, boardId, onCardAdded }) {
   const [title, setTitle] = useState('')
+
+  // Listeyi bırakma (drop) hedefi yapan hook; id olarak liste adı kullanılır
+  const { setNodeRef } = useDroppable({ id: name })
 
   async function handleAddCard() {
     if (!title.trim()) return
@@ -19,10 +23,10 @@ function List({ name, cards, boardId, onCardAdded }) {
   }
 
   return (
-    <div className="list">
+    <div className="list" ref={setNodeRef}>
       <h3>{name}</h3>
       {cards.map((card) => (
-        <Card key={card.id} title={card.title} />
+        <Card key={card.id} id={card.id} title={card.title} />
       ))}
       <div className="add-card-form">
         <input

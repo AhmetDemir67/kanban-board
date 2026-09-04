@@ -3,8 +3,9 @@ import { useParams } from 'react-router-dom'
 import { DndContext } from '@dnd-kit/core'
 import List from './List.jsx'
 import { getBoardById, moveCard } from './boardService.js'
+import { addRecentBoard } from './recentBoards.js'
 
-function Board() {
+function Board({ onBoardLoaded }) {
   const { id } = useParams()
   const [board, setBoard] = useState(null)
 
@@ -12,6 +13,12 @@ function Board() {
   async function loadBoard() {
     const data = await getBoardById(id)
     setBoard(data)
+    // Bu board'u son görüntülenenler listesine ekler
+    addRecentBoard(data.id, data.name)
+    // Üst component'e board'un (yeniden) yüklendiğini haber verir, verilmişse
+    if (onBoardLoaded) {
+      onBoardLoaded()
+    }
   }
 
   // URL'deki id değiştiğinde board'u çeker

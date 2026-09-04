@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useDroppable } from '@dnd-kit/core'
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import Card from './Card.jsx'
 import { addCardToList } from './boardService.js'
 
@@ -25,9 +26,12 @@ function List({ name, cards, boardId, onCardAdded }) {
   return (
     <div className="list" ref={setNodeRef}>
       <h3>{name}</h3>
-      {cards.map((card) => (
-        <Card key={card.id} id={card.id} title={card.title} />
-      ))}
+      {/* Kartların sıralanabilir bir grup olduğunu belirtir; items dizisi kart id'lerinden oluşur */}
+      <SortableContext items={cards.map((card) => card.id)} strategy={verticalListSortingStrategy}>
+        {cards.map((card) => (
+          <Card key={card.id} id={card.id} title={card.title} />
+        ))}
+      </SortableContext>
       <div className="add-card-form">
         <input
           type="text"

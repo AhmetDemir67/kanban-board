@@ -23,14 +23,34 @@ function Board() {
     return <p>Yükleniyor...</p>
   }
 
-  // Kart bir listenin üzerine bırakıldığında backend'e taşıma isteği gönderir ve board'u yeniden yükler
+  // Kart bir listenin veya başka bir kartın üzerine bırakıldığında backend'e taşıma isteği gönderir ve board'u yeniden yükler
   async function onDragEnd(event) {
     // Kart geçerli bir alana bırakılmadıysa (liste dışına bırakıldıysa) hiçbir şey yapma
     if (!event.over) return
 
     const cardId = event.active.id
-    const targetListName = event.over.id
-    await moveCard(board.id, cardId, targetListName, 0)
+    const overId = event.over.id
+
+    // event.over.id bir liste ismiyle eşleşiyorsa, boş bir alana ya da doğrudan listenin üzerine bırakılmıştır
+    const overList = board.lists.find((list) => list.name === overId)
+
+    let targetListName
+    let newOrder
+
+    if (overList) {
+      // Liste ismine bırakıldı: hedef liste budur, kart listenin sonuna eklenir
+      targetListName = overList.name
+      newOrder = overList.cards.length
+    } else {
+      // Bir kartın üzerine bırakıldı: o kartın bulunduğu listeyi ve sıradaki index'ini bul
+      const targetList = board.lists.find((list) =>
+        list.cards.some((card) => card.id === overId)
+      )
+      targetListName = targetList.name
+      newOrder = targetList.cards.findIndex((card) => card.id === overId)
+    }
+
+    await moveCard(board.id, cardId, targetListName, newOrder)
     loadBoard()
   }
 

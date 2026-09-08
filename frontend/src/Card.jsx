@@ -1,7 +1,7 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 
-function Card({ id, title, isOverlay = false }) {
+function Card({ id, title, isOverlay = false, onClick, listName, onDelete }) {
   // DragOverlay içindeki görsel kopya için: sürükleme özellikleri olmadan sade bir kart göster
   if (isOverlay) {
     return (
@@ -23,8 +23,25 @@ function Card({ id, title, isOverlay = false }) {
   }
 
   return (
-    <div className="card" ref={setNodeRef} style={style} {...listeners} {...attributes}>
+    <div
+      className="card"
+      ref={setNodeRef}
+      style={style}
+      {...listeners}
+      {...attributes}
+      onClick={() => onClick(id)}
+    >
       <p>{title}</p>
+      {/* Silme butonu; tıklamanın karta (modal açma) yayılmasını engelleyip doğrudan silme işlemini tetikler */}
+      <button
+        className="card-delete-button"
+        onClick={(e) => {
+          e.stopPropagation()
+          onDelete(listName, id)
+        }}
+      >
+        ×
+      </button>
     </div>
   )
 }

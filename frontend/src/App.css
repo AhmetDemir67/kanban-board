@@ -5,6 +5,61 @@ body {
   font-family: sans-serif;
 }
 
+/* Toast bildirimi: sağ altta sabit, hafif gölge; renk toast-success/toast-error/toast-warning ile belirlenir */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: #ffffff;
+  padding: 10px 16px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Başarı bildirimi: koyu yeşil arka plan */
+.toast-success {
+  background-color: #1e5631;
+}
+
+/* Hata bildirimi: koyu kırmızı arka plan */
+.toast-error {
+  background-color: #7a2530;
+}
+
+/* Uyarı bildirimi: koyu turuncu/amber arka plan */
+.toast-warning {
+  background-color: #8a5a00;
+}
+
+/* Hata mesajı: hafif şeffaf kırmızı arka plan, kırmızı yazı, ortalanmış */
+.error-message {
+  background-color: rgba(220, 53, 69, 0.15);
+  color: #dc3545;
+  padding: 10px 12px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+/* Yükleniyor animasyonu: sabit boyutlu daire, üst kenarlığı mor, sürekli dönerek döner */
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 4px solid #3a3a3a;
+  border-top: 4px solid #6d5bd0;
+  margin: 40px auto;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Mobil (varsayılan): listeler alt alta dizilir */
 .board {
   display: flex;
@@ -28,6 +83,43 @@ body {
   border-radius: 6px;
   padding: 10px;
   margin-bottom: 10px;
+  /* Silme butonunun köşeye mutlak konumlandırılabilmesi için referans konum */
+  position: relative;
+}
+
+/* Kartın sağ üst köşesinde duran, dairesel, hafif kırmızımsı şeffaf silme butonu */
+.card-delete-button {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #f0f0f0;
+  font-size: 12px;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* Hover'da belirgin kırmızıya yakın bir renge geçer */
+.card-delete-button:hover {
+  background-color: rgba(220, 53, 69, 0.8);
+  color: #ffffff;
+}
+
+/* Liste boşken gösterilen mesaj: soluk, italik ve ortalanmış */
+.empty-list-message {
+  color: #666;
+  font-style: italic;
+  text-align: center;
+  padding: 12px;
 }
 
 /* Kart ekleme formu: input ve butonu dikey sırayla, aralarında boşlukla düzenler */
@@ -58,6 +150,111 @@ body {
 }
 
 .add-card-form button:hover {
+  background-color: #8272e0;
+}
+
+/* Modal arkaplanı: ekranı kaplayan, yarı saydam koyu bir katman, içeriği ortalar */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modal kutusu: koyu tema ile uyumlu arka plan, sabit maksimum genişlik */
+.modal-content {
+  background-color: #2a2a2a;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Modal içindeki textarea: koyu tema uyumlu, tam genişlik, minimum yükseklik */
+.modal-content textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #3a3a3a;
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+/* Modal butonları: kartlarla uyumlu mor vurgu rengi, aralarında boşluk, hover'da hafif renk değişimi */
+.modal-content button {
+  background-color: #6d5bd0;
+  color: #f0f0f0;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.modal-content button:hover {
+  background-color: #8272e0;
+}
+
+/* Board listesi: board öğeleri alt alta, aralarında boşluk, kenarlarda padding */
+.board-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+}
+
+/* Board listesi öğesi: kartlardan farklı, koyu tema uyumlu bir ton; link olduğu için alt çizgisiz */
+.board-list-item {
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  padding: 12px;
+  text-decoration: none;
+  color: #f0f0f0;
+  transition: background-color 0.2s;
+}
+
+.board-list-item:hover {
+  background-color: #3a3a3a;
+}
+
+/* Yeni board oluşturma formu: add-card-form ile aynı düzen, input ve buton dikey sırayla */
+.new-board-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.new-board-form input {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+  border: 1px solid #3a3a3a;
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+
+.new-board-form button {
+  background-color: #6d5bd0;
+  color: #f0f0f0;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.new-board-form button:hover {
   background-color: #8272e0;
 }
 

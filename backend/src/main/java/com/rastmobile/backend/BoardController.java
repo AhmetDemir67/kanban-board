@@ -38,6 +38,12 @@ public class BoardController {
         return boardService.getBoardById(id);
     }
 
+    // Belirtilen board'un ismini günceller
+    @PatchMapping("/{boardId}")
+    public Board updateBoardName(@PathVariable String boardId, @Valid @RequestBody BoardRequest request) {
+        return boardService.updateBoardName(boardId, request.getName());
+    }
+
     // Belirtilen board'daki belirtilen listeye yeni bir kart ekler
     @PostMapping("/{boardId}/lists/{listName}/cards")
     public Board addCardToList(@PathVariable String boardId, @PathVariable String listName, @Valid @RequestBody CardRequest request) {
@@ -56,5 +62,12 @@ public class BoardController {
     public Board moveCard(@PathVariable String boardId, @PathVariable String cardId,
             @RequestBody MoveCardRequest request) {
         return boardService.moveCard(boardId, cardId, request.getTargetListName(), request.getNewOrder());
+    }
+
+    // Bir kartın description alanını günceller
+    @PatchMapping("/{boardId}/cards/{cardId}/description")
+    public Board updateCardDescription(@PathVariable String boardId, @PathVariable String cardId,
+            @RequestBody UpdateDescriptionRequest request) {
+        return boardService.updateCardDescription(boardId, cardId, request.getDescription());
     }
 }

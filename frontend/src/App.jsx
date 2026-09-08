@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import Header from './Header.jsx'
 import Board from './Board.jsx'
+import BoardList from './BoardList.jsx'
 import RecentBoards from './RecentBoards.jsx'
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Header />
       <RecentBoards key={refreshKey} />
       <Routes>
+        <Route path="/" element={<BoardList />} />
         <Route
           path="/boards/:id"
           element={<Board onBoardLoaded={() => setRefreshKey((prev) => prev + 1)} />}

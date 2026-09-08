@@ -21,4 +21,3 @@ public class MoveCardRequest {
         this.newOrder = newOrder;
     }
 }
-    

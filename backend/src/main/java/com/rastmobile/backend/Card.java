@@ -1,13 +1,16 @@
 package com.rastmobile.backend;
 
+import java.util.UUID;
+
 public class Card {
     private String id;
     private String title;
     private int order;
+    private String description;
 
     // Kart oluşturulurken benzersiz bir id atanması için constructor
     public Card() {
-        this.id = java.util.UUID.randomUUID().toString(); // id yi elle üretiyoruz
+        this.id = UUID.randomUUID().toString();
     }
 
     public String getId() { return id; }
@@ -18,4 +21,7 @@ public class Card {
 
     public int getOrder() { return order; }
     public void setOrder(int order) { this.order = order; }
+
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 }

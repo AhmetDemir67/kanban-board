@@ -37,6 +37,7 @@ function List({ name, cards, boardId, onCardAdded, onCardClick, onCardDelete }) 
               key={card.id}
               id={card.id}
               title={card.title}
+              color={card.color}
               onClick={onCardClick}
               listName={name}
               onDelete={onCardDelete}

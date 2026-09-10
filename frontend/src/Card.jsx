@@ -1,7 +1,7 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 
-function Card({ id, title, isOverlay = false, onClick, listName, onDelete }) {
+function Card({ id, title, color, isOverlay = false, onClick, listName, onDelete }) {
   // DragOverlay içindeki görsel kopya için: sürükleme özellikleri olmadan sade bir kart göster
   if (isOverlay) {
     return (
@@ -16,10 +16,12 @@ function Card({ id, title, isOverlay = false, onClick, listName, onDelete }) {
 
   // Sürükleme sırasında kartın fare ile birlikte hareket etmesi ve akıcı bir animasyon için transform/transition stilini oluşturur
   // Kart sürükleniyorsa, orijinal konumundaki kopyası soluklaştırılır (asıl görünür kopya DragOverlay'dedir)
+  // color prop'u doluysa kartın arka planını bu renge boyar; boşsa CSS'teki varsayılan .card rengi kalır
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
     ...(isDragging ? { opacity: 0.3 } : {}),
+    ...(color ? { backgroundColor: color } : {}),
   }
 
   return (

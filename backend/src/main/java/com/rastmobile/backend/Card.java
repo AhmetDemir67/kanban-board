@@ -7,6 +7,7 @@ public class Card {
     private String title;
     private int order;
     private String description;
+    private String color;
 
     // Kart oluşturulurken benzersiz bir id atanması için constructor
     public Card() {
@@ -24,4 +25,7 @@ public class Card {
 
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
+
+    public String getColor() { return color; }
+    public void setColor(String color) { this.color = color; }
 }

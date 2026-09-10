@@ -80,6 +80,13 @@ public class BoardService {
         return boardRepository.save(board);
     }
 
+    // Belirtilen board'daki, id'si cardId olan kartın color alanını günceller
+    public Board updateCardColor(String boardId, String cardId, String color) {
+        Board board = getBoardById(boardId);
+        findCardById(board, cardId).setColor(color);
+        return boardRepository.save(board);
+    }
+
     // Belirtilen board'un name alanını günceller
     public Board updateBoardName(String boardId, String newName) {
         Board board = getBoardById(boardId);

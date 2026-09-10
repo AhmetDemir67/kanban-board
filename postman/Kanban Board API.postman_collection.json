@@ -12,6 +12,15 @@
       "request": {
         "method": "POST",
         "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\": \"Final Test\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
         "url": {
           "raw": "http://localhost:8080/boards",
           "protocol": "http",
@@ -128,7 +137,111 @@
       "name": "Tüm Board'ları Listele",
       "request": {
         "method": "GET",
-        "header": []
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/boards",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "boards"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Kart Açıklaması Güncelle",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"description\": \"Bu kartla ilgili detaylı açıklama metni.\"\r\n}   ",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/boards/6a9f0ecb8aea266f578d2519/cards/d94ba53b-926b-40f3-9414-08b580193059/description",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "boards",
+            "6a9f0ecb8aea266f578d2519",
+            "cards",
+            "d94ba53b-926b-40f3-9414-08b580193059",
+            "description"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Board İsmi Güncelle",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\": \"Yeni İsim Testi\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/boards/6a9f0ecb8aea266f578d2519",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "boards",
+            "6a9f0ecb8aea266f578d2519"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Kart Rengi Güncelle",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"color\": \"#e74c3c\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/boards/6a9f0ecb8aea266f578d2519/cards/57f4ed0d-0915-4f9e-a2ed-d5756638f767/color",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "boards",
+            "6a9f0ecb8aea266f578d2519",
+            "cards",
+            "57f4ed0d-0915-4f9e-a2ed-d5756638f767",
+            "color"
+          ]
+        }
       },
       "response": []
     }

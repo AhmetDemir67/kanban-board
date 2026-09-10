@@ -53,6 +53,16 @@
     return res.json()
   }
 
+  // Bir kartın color alanını günceller
+  export async function updateCardColor(boardId, cardId, color) {
+    const res = await fetch(`http://localhost:8080/boards/${boardId}/cards/${cardId}/color`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ color }),
+    })
+    return res.json()
+  }
+
   // Belirtilen listedeki bir kartı siler
   export async function deleteCard(boardId, listName, cardId) {
     const res = await fetch(

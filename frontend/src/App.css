@@ -191,6 +191,28 @@ body {
   resize: vertical;
 }
 
+/* Renk paleti kapsayıcısı: renk dairelerini yan yana, aralarında boşlukla dizer */
+.color-swatches {
+  display: flex;
+  gap: 8px;
+}
+
+/* Renk dairesi: küçük, dairesel, tıklanabilir; hover'da hafifçe büyür */
+/* Özgüllük .modal-content button kuralını geçsin diye .modal-content ile niteleniyor */
+.modal-content .color-swatch {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.modal-content .color-swatch:hover {
+  transform: scale(1.15);
+}
+
 /* Modal butonları: kartlarla uyumlu mor vurgu rengi, aralarında boşluk, hover'da hafif renk değişimi */
 .modal-content button {
   background-color: #6d5bd0;

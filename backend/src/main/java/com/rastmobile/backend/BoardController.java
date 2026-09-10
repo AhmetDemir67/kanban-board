@@ -70,4 +70,11 @@ public class BoardController {
             @RequestBody UpdateDescriptionRequest request) {
         return boardService.updateCardDescription(boardId, cardId, request.getDescription());
     }
+
+    // Bir kartın color alanını günceller
+    @PatchMapping("/{boardId}/cards/{cardId}/color")
+    public Board updateCardColor(@PathVariable String boardId, @PathVariable String cardId,
+            @RequestBody UpdateColorRequest request) {
+        return boardService.updateCardColor(boardId, cardId, request.getColor());
+    }
 }

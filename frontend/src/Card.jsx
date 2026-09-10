@@ -1,7 +1,7 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 
-function Card({ id, title, color, isOverlay = false, onClick, listName, onDelete }) {
+function Card({ id, title, description, color, isOverlay = false, onClick, listName, onDelete }) {
   // DragOverlay içindeki görsel kopya için: sürükleme özellikleri olmadan sade bir kart göster
   if (isOverlay) {
     return (
@@ -34,6 +34,8 @@ function Card({ id, title, color, isOverlay = false, onClick, listName, onDelete
       onClick={() => onClick(id)}
     >
       <p>{title}</p>
+      {/* Açıklama doluysa başlığın altında küçük, soluk bir satır olarak gösterilir */}
+      {description && <p className="card-description">{description}</p>}
       {/* Silme butonu; tıklamanın karta (modal açma) yayılmasını engelleyip doğrudan silme işlemini tetikler */}
       <button
         className="card-delete-button"

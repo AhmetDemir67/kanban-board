@@ -21,3 +21,8 @@ export function getRecentBoards() {
   const stored = localStorage.getItem(STORAGE_KEY)
   return stored ? JSON.parse(stored) : []
 }
+
+// Son görüntülenenler geçmişini localStorage'dan tamamen siler
+export function clearRecentBoards() {
+  localStorage.removeItem(STORAGE_KEY)
+}

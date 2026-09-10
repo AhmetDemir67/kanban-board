@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { getRecentBoards } from './recentBoards.js'
+import { getRecentBoards, clearRecentBoards } from './recentBoards.js'
 
 function RecentBoards() {
   const [recentBoards, setRecentBoards] = useState([])
@@ -15,16 +15,27 @@ function RecentBoards() {
     return null
   }
 
+  // Geçmişi localStorage'dan siler ve ekrandaki listeyi anında boşaltır
+  function handleClear() {
+    clearRecentBoards()
+    setRecentBoards([])
+  }
+
   return (
     <div className="recent-boards">
       <h3>Son Gezdiklerim</h3>
-      <ul>
+      {/* Her board, pill görünümlü bir link (chip) olarak yatay dizilir */}
+      <div className="recent-boards-list">
         {recentBoards.map((board) => (
-          <li key={board.id}>
-            <Link to={`/boards/${board.id}`}>{board.name}</Link>
-          </li>
+          <Link key={board.id} to={`/boards/${board.id}`} className="recent-board-chip">
+            {board.name}
+          </Link>
         ))}
-      </ul>
+      </div>
+      {/* Geçmişi tamamen temizleyen küçük buton */}
+      <button className="clear-recent-button" onClick={handleClear}>
+        Geçmişi Temizle
+      </button>
     </div>
   )
 }

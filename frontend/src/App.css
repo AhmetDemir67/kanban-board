@@ -66,6 +66,8 @@ body {
   flex-direction: column;
   gap: 16px;
   padding: 20px;
+  /* Her liste diğerlerine göre uzamak yerine sadece kendi içeriği kadar yer kaplasın */
+  align-items: flex-start;
 }
 
 /* Mobil (varsayılan): liste tam genişlik kaplar */
@@ -85,6 +87,14 @@ body {
   margin-bottom: 10px;
   /* Silme butonunun köşeye mutlak konumlandırılabilmesi için referans konum */
   position: relative;
+}
+
+/* Kart açıklaması: başlığın altında küçük, soluk ve ferah satır aralıklı metin */
+.card-description {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 6px;
+  line-height: 1.5;
 }
 
 /* Kartın sağ üst köşesinde duran, dairesel, hafif kırmızımsı şeffaf silme butonu */
@@ -280,10 +290,57 @@ body {
   background-color: #8272e0;
 }
 
+/* Son gezilen board'lar bölümü: sola hizalı, kenarlarda padding */
+.recent-boards {
+  padding: 20px;
+  text-align: left;
+}
+
+/* Board chip'lerini yatayda, sığmazsa alt satıra taşarak dizer */
+.recent-boards-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Tek bir board chip'i: pill görünümlü, koyu ama board'dan farklı bir ton; hover'da açılır */
+.recent-board-chip {
+  background-color: #2a2a2a;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 13px;
+  text-decoration: none;
+  color: #f0f0f0;
+  transition: background-color 0.2s;
+}
+
+.recent-board-chip:hover {
+  background-color: #3a3a3a;
+}
+
+/* Geçmişi temizle butonu: arka planı olmayan, metin gibi görünen soluk bir bağlantı; hover'da belirginleşir */
+.clear-recent-button {
+  margin-top: 10px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: #666;
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.clear-recent-button:hover {
+  color: #f0f0f0;
+}
+
 /* Tablet ve üstü (768px+): listeler yan yana dizilir, sabit genişlikte */
 @media (min-width: 768px) {
   .board {
     flex-direction: row;
+    /* Yan yana dizilen listeler en uzun listenin boyuna uzamak yerine kendi içerikleri kadar yükselsin */
+    align-items: flex-start;
   }
 
   .list {

@@ -146,7 +146,19 @@ Projenin tüm API endpointlerini içeren Postman koleksiyonu `postman/` klasör�
 
 ## Ekran Görüntüleri
 
-_(Ekran görüntüleri buraya eklenecek.)_
+**Ana sayfa — board listesi ve yeni board oluşturma**
+
+![Ana Sayfa](screenshots/ana-sayfa.png)
+
+**Board görünümü — renkli kartlar ve açıklamalarla**
+
+![Board Görünümü 1](screenshots/board-renkli.png)
+
+![Board Görünümü 2](screenshots/board-renkli-2.png)
+
+**Kart detayı — açıklama ve renk seçimi**
+
+![Kart Detayı](screenshots/kart-modal.png)
 
 ## Geliştirici Notu
 

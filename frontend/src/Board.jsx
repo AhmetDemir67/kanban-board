@@ -212,7 +212,7 @@ function Board({ onBoardLoaded }) {
           />
         ))}
         {/* Sürüklenen kartın fareyle birlikte serbestçe hareket eden görsel kopyası */}
-        <DragOverlay>{activeCard ? <Card title={activeCard.title} isOverlay={true} /> : null}</DragOverlay>
+        <DragOverlay>{activeCard ? <Card title={activeCard.title} color={activeCard.color} isOverlay={true} /> : null}</DragOverlay>
       </DndContext>
       {/* Bir karta tıklandığında, kartın detayını gösteren ve description düzenlemeye izin veren modal */}
       {selectedCard && (

@@ -4,8 +4,9 @@ import { CSS } from '@dnd-kit/utilities'
 function Card({ id, title, description, color, isOverlay = false, onClick, listName, onDelete }) {
   // DragOverlay içindeki görsel kopya için: sürükleme özellikleri olmadan sade bir kart göster
   if (isOverlay) {
+    // color prop'u doluysa gerçek karttaki gibi arka planı bu renge boyar
     return (
-      <div className="card">
+      <div className="card" style={color ? { backgroundColor: color } : undefined}>
         <p>{title}</p>
       </div>
     )
